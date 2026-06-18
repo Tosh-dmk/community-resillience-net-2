@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -101,6 +102,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
+        href: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+      },
+      {
+        rel: "stylesheet",
         href: appCss,
       },
     ],
@@ -127,11 +132,23 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
+  const isNavigating = routerState.status === "pending";
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
+          {isNavigating && (
+            <div 
+              className="fixed top-0 left-0 right-0 h-[3px] bg-accent z-[9999] animate-pulse" 
+              style={{
+                boxShadow: "0 1px 8px var(--accent)",
+              }}
+              role="progressbar"
+              aria-label="Loading page"
+            />
+          )}
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
           <Toaster position="top-center" />

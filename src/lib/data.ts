@@ -68,6 +68,7 @@ export const myReportsQuery = (userId: string | undefined) =>
       const { data, error } = await supabase
         .from("disaster_reports")
         .select("*")
+        .eq("user_id", userId!)
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data ?? [];

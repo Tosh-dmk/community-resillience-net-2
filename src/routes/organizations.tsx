@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { RouteError, RouteNotFound } from "@/components/route-boundaries";
 import { organizationsQuery } from "@/lib/data";
+import { OrganizationsSkeleton } from "@/components/Skeletons";
 
 export const Route = createFileRoute("/organizations")({
   head: () => ({
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/organizations")({
   loader: ({ context }) => {
     context.queryClient.ensureQueryData(organizationsQuery());
   },
+  pendingComponent: OrganizationsSkeleton,
   component: Organizations,
   errorComponent: RouteError,
   notFoundComponent: RouteNotFound,

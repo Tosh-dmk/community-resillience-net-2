@@ -165,36 +165,33 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
--- ============ SEED DATA ============
 insert into public.aid_organizations (name, category, description, region, amount_label, deadline, verified, tags) values
-('FEMA Individual Assistance', 'government', 'Financial help for homeowners and renters with uninsured disaster expenses including housing and personal property.', 'National', 'Up to $42,500', 'Rolling', true, '{housing,grants,flood}'),
-('SBA Disaster Loans', 'government', 'Low-interest disaster loans for businesses, homeowners, and renters to repair or replace damaged property.', 'National', 'Up to $500,000', 'Rolling', true, '{loans,business,rebuilding}'),
-('Red Cross Emergency Relief', 'non_profit', 'Immediate emergency assistance: shelter, food, health services, and emotional support after disasters.', 'National', 'Emergency aid', 'Ongoing', true, '{shelter,food,emergency}'),
-('Habitat for Humanity Rebuild', 'non_profit', 'Volunteer labor, tool lending, and affordable rebuilding support for disaster-affected homeowners.', 'National', 'In-kind support', 'Ongoing', true, '{rebuilding,volunteers,housing}'),
-('Coastal Small Business Grant', 'non_profit', 'Emergency funding for local businesses affected by storm surges and flooding.', 'Southeast', 'Up to $15,000', 'Oct 30', true, '{business,grants,storm}'),
-('Rebuild Materials Fund', 'community', 'Crowdfunded pool providing lumber, roofing, and construction supplies to neighbors in need.', 'Western Region', 'Available now', 'Ongoing', true, '{materials,community,rebuilding}'),
-('Farmers Drought Relief Program', 'government', 'Assistance for agricultural producers facing crop and livestock losses due to drought.', 'Midwest', 'Up to $125,000', 'Dec 15', true, '{drought,agriculture,grants}'),
-('Mutual Aid Network', 'community', 'Neighbor-to-neighbor support coordinating meals, childcare, and cleanup crews.', 'National', 'Volunteer-led', 'Ongoing', true, '{community,volunteers,food}'),
-('GlobalGiving Disaster Recovery', 'donor', 'Donor-backed grants channeled to vetted local organizations leading recovery efforts.', 'International', 'Varies', 'Ongoing', true, '{donor,grants,recovery}'),
-('United Way Recovery Fund', 'non_profit', 'Long-term recovery support including case management, financial counseling, and rebuilding grants.', 'National', 'Case-by-case', 'Ongoing', true, '{recovery,counseling,grants}');
+('Kenya Red Cross Society (KRCS)', 'non_profit', 'Emergency rescue, first aid, temporary tents, water purification, and survival kit distribution across flood and landslide hit counties.', 'National', 'Emergency Aid', 'Ongoing', true, '{emergency,shelter,first_aid,flood}'),
+('NDMA Drought Cash Transfers', 'government', 'Cash disbursements via the Hunger Safety Net Programme (HSNP) to registered vulnerable families in Arid and Semi-Arid Land (ASAL) counties.', 'National', 'Up to KES 20,000', 'Rolling', true, '{drought,grants,agriculture}'),
+('Safaricom Foundation Disaster Grant', 'donor', 'Support for local community groups, reconstruction of schools and hospitals, and mobile money aid transfers.', 'National', 'Varies', 'Ongoing', true, '{grants,rebuilding,medical}'),
+('Ministry of Devolution and ASALs Relief', 'government', 'Government food distribution networks, iron sheets for roofing rebuilds, and direct relief supplies.', 'National', 'In-kind support', 'Ongoing', true, '{food,materials,emergency}'),
+('Equity Group Foundation Recovery Loans', 'non_profit', 'Rehabilitation loans and agricultural inputs grants for smallholder farmers and businesses affected by climate shocks.', 'Rift Valley', 'Up to KES 500,000', 'Dec 31', true, '{loans,grants,agriculture}'),
+('Budalangi Flood Rebuild Fund', 'community', 'Crowdfunded local building materials pool (timber, cement, roofing sheets) managed by community elders.', 'Western Region', 'Available now', 'Ongoing', true, '{materials,rebuilding,flood}'),
+('ActionAid Kenya Livelihood Grants', 'non_profit', 'Direct recovery cash transfers and rebuilding materials focusing on vulnerable women and child-headed households.', 'Coastal Region', 'Up to KES 50,000', 'Ongoing', true, '{grants,housing,community}'),
+('Kenya Farmers Mutual Aid Chama', 'community', 'Grassroots mutual support coordinating seed distribution, tractor sharing, and soil recovery volunteers.', 'Rift Valley', 'Volunteer-led', 'Ongoing', true, '{community,volunteers,food,drought}');
 
 insert into public.support_groups (name, description, topic, region, member_count) values
-('Flood Survivors Together', 'A space for those rebuilding after floods to share resources, contractor tips, and encouragement.', 'Flood Recovery', 'Western Region', 1284),
-('Earthquake Rebuild Circle', 'Connect with neighbors navigating structural repairs and seismic retrofitting.', 'Earthquake', 'West Coast', 642),
-('Drought Resilience Farmers', 'Agricultural community sharing water-saving strategies and relief program updates.', 'Drought', 'Midwest', 938),
-('Storm Recovery Families', 'Support and practical help for families displaced by hurricanes and severe storms.', 'Storm', 'Southeast', 2105),
-('Volunteers & Helpers Hub', 'For volunteers offering labor, tools, transport, and skills to affected communities.', 'Volunteering', 'National', 3470),
-('Mental Health & Recovery', 'A compassionate group focused on emotional wellbeing during the recovery journey.', 'Wellbeing', 'National', 1567);
+('Flood Survivors - Budalangi & Nyando', 'A chama-style support circle for those rebuilding after floods in Busia, Kisumu, and Tana River.', 'Flood Recovery', 'Western Region', 1420),
+('Drought Resilience ASAL Network', 'Connect with pastoralists and dryland farmers sharing water management tips and NDMA relief updates.', 'Drought', 'Northern Kenya', 945),
+('Landslide Support - West Pokot & Muranga', 'Community help, contractor references, and mutual aid for land restoration in landslide-prone hilly areas.', 'Landslide', 'Rift Valley', 388),
+('Nairobi Urban Flood Help', 'Coordination of rescue, volunteer cleanups, and emergency shelter sharing in Nairobi estates.', 'Storm', 'Nairobi', 2105),
+('Volunteers & Helpers Kenya Hub', 'For volunteers offering M-Pesa donations, transport, construction skills, and sorting relief items.', 'Volunteering', 'National', 3560),
+('Community Mental Health & Support Kenya', 'A safe, compassionate counseling and trauma recovery space led by local mental health volunteers.', 'Wellbeing', 'National', 1224);
 
 insert into public.relief_updates (title, body, region, severity) values
-('New FEMA disaster declaration approved', 'Federal assistance is now available for residents in newly declared counties. Applications open immediately.', 'Western Region', 'high'),
-('Additional shelter capacity opened', 'Three new emergency shelters with 400 combined beds are now operating downtown.', 'Southeast', 'info'),
-('Free debris removal program launched', 'Crews are available for no-cost debris and hazard removal for affected households this month.', 'Midwest', 'info'),
-('Small business grant deadline extended', 'The Coastal Small Business Grant deadline has been extended to October 30 due to high demand.', 'Southeast', 'medium');
+('Severe Flood Warning - Tana River Basin', 'Water levels in the Tana River have reached critical thresholds. Residents in Garissa and Tana River lowlands are urged to move to higher ground immediately.', 'Coastal Region', 'high'),
+('NDMA Drought Cash Transfers Disbursed', 'The Hunger Safety Net Programme (HSNP) funds for this quarter have been released to banks and mobile money agents. Check Huduma Centers for updates.', 'Northern Kenya', 'info'),
+('Free Building Iron Sheets Distribution', 'Kenya Red Cross is distributing roofing iron sheets, poles, and treated mosquito nets in Budalangi and Nyando this week.', 'Western Region', 'info'),
+('Safaricom Foundation MSME Grants Extended', 'Rebuilding grants applications for local shops and traders affected by landslide or flood debris extended to October 30.', 'National', 'medium');
 
 insert into public.assistance_centers (name, address, region, services, is_open, phone, lat, lng) values
-('Asheville Recovery Hub', '122 Commerce St, Asheville, NC', 'Western Region', '{Water,Hot Meals,Power Charging,Wifi}', true, '800-555-0142', 35.5951, -82.5515),
-('Riverside Relief Center', '88 Lakeview Ave, Riverside', 'Western Region', '{Shelter,First Aid,Supplies}', true, '800-555-0188', 35.61, -82.56),
-('Unity Baptist Supply Point', '40 Faith Rd, Greenville', 'Southeast', '{Water,Food,Clothing}', true, '800-555-0199', 34.85, -82.39),
-('Civic Heights Distribution', '215 Civic Center Blvd', 'Midwest', '{Supplies,Tools,Information}', false, '800-555-0123', 41.87, -87.62),
-('Coastal Resource Station', '12 Harbor Way', 'Southeast', '{First Aid,Shelter,Pet Care}', true, '800-555-0167', 32.08, -81.09);
+('Nairobi Central Relief Station', 'Huduma Centre GPO, Nairobi', 'Nairobi', '{Water,Hot Meals,Power Charging,Wifi,Information}', true, '0800-555-111', -1.2847, 36.8244),
+('Garissa Drought Relief Hub', 'NDMA Office, Garissa-Mombasa Road', 'Northern Kenya', '{Water,Food,Livestock Feed,First Aid}', true, '0800-555-222', -0.4560, 39.6405),
+('Budalangi Flood Rescue Hall', 'Budalangi Primary School Hall, Busia', 'Western Region', '{Shelter,First Aid,Supplies,Pet Care}', true, '0800-555-333', 0.1205, 34.0510),
+('Nyando Relief Distribution Point', 'Ahero Multipurpose Center, Kisumu', 'Nyanza', '{Water,Food,Supplies,Tools}', true, '0800-555-444', -0.1740, 34.9200),
+('Kapenguria Landslide Support Center', 'Kapenguria District Hospital Annexe, West Pokot', 'Rift Valley', '{First Aid,Shelter,Food,Mental Health}', false, '0800-555-555', 1.2390, 35.1220);

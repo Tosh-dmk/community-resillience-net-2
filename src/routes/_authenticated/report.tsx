@@ -44,14 +44,36 @@ const disasterTypes: { value: DisasterType; label: string }[] = [
 ];
 
 const needOptions = [
-  "Housing",
-  "Financial aid",
-  "Food & water",
-  "Medical care",
+  "Temporary housing",
+  "M-Pesa cash assistance",
+  "Food & clean water",
+  "Medical aid",
   "Rebuilding materials",
   "Volunteers & labor",
-  "Mental health support",
-  "Transportation",
+  "Counseling & mental health",
+  "Transport & relocation",
+];
+
+const kenyanCounties = [
+  "Nairobi",
+  "Garissa",
+  "Turkana",
+  "Tana River",
+  "Busia",
+  "Kisumu",
+  "West Pokot",
+  "Murang'a",
+  "Mombasa",
+  "Nakuru",
+  "Wajir",
+  "Mandera",
+  "Marsabit",
+  "Baringo",
+  "Elgeyo Marakwet",
+  "Kiambu",
+  "Kakamega",
+  "Uasin Gishu",
+  "Other",
 ];
 
 const reportSchema = z.object({
@@ -78,16 +100,18 @@ function ReportPage() {
   const queryClient = useQueryClient();
 
   const [disasterType, setDisasterType] = useState<DisasterType | "">("");
-  const [location, setLocation] = useState("");
+  const [county, setCounty] = useState("");
+  const [specificLocation, setSpecificLocation] = useState("");
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState([3]);
   const [needs, setNeeds] = useState<string[]>([]);
 
   const mutation = useMutation({
     mutationFn: async () => {
+      const fullLoc = county ? `${county} County${specificLocation ? `, ${specificLocation}` : ""}` : specificLocation;
       const parsed = reportSchema.parse({
         disaster_type: disasterType,
-        location,
+        location: fullLoc,
         description,
       });
       const { error } = await supabase.from("disaster_reports").insert({
@@ -119,6 +143,10 @@ function ReportPage() {
     e.preventDefault();
     if (!disasterType) {
       toast.error("Please select a disaster type.");
+      return;
+    }
+    if (!county) {
+      toast.error("Please select a county.");
       return;
     }
     mutation.mutate();
@@ -160,16 +188,37 @@ function ReportPage() {
             </Select>
           </div>
 
-          <div>
-            <Label htmlFor="location">Location</Label>
-            <Input
-              id="location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="City, region, or address"
-              className="mt-1.5"
-              required
-            />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <Label htmlFor="county">County</Label>
+              <Select
+                value={county}
+                onValueChange={setCounty}
+              >
+                <SelectTrigger id="county" className="mt-1.5">
+                  <SelectValue placeholder="Select County" />
+                </SelectTrigger>
+                <SelectContent>
+                  {kenyanCounties.map((c) => (
+                    <SelectItem key={c} value={c}>
+                      {c} County
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label htmlFor="specific_location">Sub-County / Village / Address</Label>
+              <Input
+                id="specific_location"
+                value={specificLocation}
+                onChange={(e) => setSpecificLocation(e.target.value)}
+                placeholder="e.g. Nyando, Budalangi, or street address"
+                className="mt-1.5"
+                required
+              />
+            </div>
           </div>
 
           <div>

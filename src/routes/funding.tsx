@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { RouteError, RouteNotFound } from "@/components/route-boundaries";
 import { organizationsQuery } from "@/lib/data";
+import { FundingSkeleton } from "@/components/Skeletons";
 
 export const Route = createFileRoute("/funding")({
   head: () => ({
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/funding")({
   loader: ({ context }) => {
     context.queryClient.ensureQueryData(organizationsQuery());
   },
+  pendingComponent: FundingSkeleton,
   component: Funding,
   errorComponent: RouteError,
   notFoundComponent: RouteNotFound,
@@ -30,32 +32,32 @@ export const Route = createFileRoute("/funding")({
 const campaigns = [
   {
     id: "c1",
-    title: "Rebuild the Riverside Community Center",
-    location: "Western Region",
-    raised: 48200,
-    goal: 75000,
-    donors: 412,
+    title: "Budalangi Community Hall Rebuild",
+    location: "Busia County",
+    raised: 580000,
+    goal: 900000,
+    donors: 312,
   },
   {
     id: "c2",
-    title: "Emergency Roofing for Storm-Hit Families",
-    location: "Southeast",
-    raised: 23900,
-    goal: 40000,
-    donors: 268,
+    title: "Emergency Roofing for Nyando Flood Families",
+    location: "Kisumu County",
+    raised: 350000,
+    goal: 500000,
+    donors: 245,
   },
   {
     id: "c3",
-    title: "Clean Water & Wells After the Drought",
-    location: "Midwest",
-    raised: 61500,
-    goal: 80000,
-    donors: 537,
+    title: "Clean Water & Boreholes for Turkana",
+    location: "Turkana County",
+    raised: 820000,
+    goal: 1200000,
+    donors: 589,
   },
 ];
 
 const currency = (n: number) =>
-  n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  n.toLocaleString("en-KE", { style: "currency", currency: "KES", maximumFractionDigits: 0 });
 
 function Funding() {
   const { data: orgs } = useSuspenseQuery(organizationsQuery());

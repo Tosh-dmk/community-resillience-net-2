@@ -103,7 +103,7 @@ function AuthPage() {
               : "Get matched with aid and connect with your community."}
           </p>
 
-          <Button
+           <Button
             type="button"
             variant="outline"
             className="mt-6 w-full rounded-full"
@@ -112,6 +112,9 @@ function AuthPage() {
           >
             Continue with Google
           </Button>
+          <p className="mt-2 text-center text-[10px] text-muted-foreground">
+            Note: Google login requires OAuth redirect configuration in the Supabase Dashboard. If not configured, please use the Email & Password option.
+          </p>
 
           <div className="my-6 flex items-center gap-3 text-xs text-muted-foreground">
             <span className="h-px flex-1 bg-border" />

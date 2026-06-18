@@ -6,7 +6,8 @@ import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
 import { RouteError, RouteNotFound } from "@/components/route-boundaries";
 import { assistanceCentersQuery } from "@/lib/data";
-import mapPreview from "@/assets/map-preview.jpg";
+import { InteractiveMap } from "@/components/InteractiveMap";
+import { MapSkeleton } from "@/components/Skeletons";
 
 export const Route = createFileRoute("/map")({
   head: () => ({
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/map")({
   loader: ({ context }) => {
     context.queryClient.ensureQueryData(assistanceCentersQuery());
   },
+  pendingComponent: MapSkeleton,
   component: MapPage,
   errorComponent: RouteError,
   notFoundComponent: RouteNotFound,
@@ -94,13 +96,11 @@ function MapPage() {
           {/* Map + detail */}
           <div className="lg:col-span-3">
             <div className="relative overflow-hidden rounded-3xl ring-1 ring-border">
-              <img
-                src={mapPreview}
-                alt="Map of assistance centers"
-                width={1440}
-                height={600}
-                loading="lazy"
-                className="h-[300px] w-full object-cover md:h-[440px]"
+              <InteractiveMap
+                centers={centers}
+                selectedId={selectedId}
+                onSelectId={setSelectedId}
+                className="h-[300px] w-full rounded-3xl md:h-[440px]"
               />
               {selected && (
                 <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-card/95 p-6 shadow-soft backdrop-blur-sm sm:left-6 sm:right-auto sm:max-w-sm">

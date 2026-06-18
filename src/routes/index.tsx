@@ -16,7 +16,7 @@ import {
   organizationsQuery,
   assistanceCentersQuery,
 } from "@/lib/data";
-import mapPreview from "@/assets/map-preview.jpg";
+import { InteractiveMap } from "@/components/InteractiveMap";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -145,13 +145,10 @@ function Index() {
             </Button>
           </div>
           <div className="relative overflow-hidden rounded-3xl ring-1 ring-border">
-            <img
-              src={mapPreview}
-              alt="Map showing nearby relief and assistance centers"
-              width={1440}
-              height={600}
-              loading="lazy"
-              className="h-[320px] w-full object-cover md:h-[420px]"
+            <InteractiveMap
+              centers={centers}
+              selectedId={nearest?.id}
+              className="h-[320px] w-full rounded-3xl md:h-[420px]"
             />
             {nearest && (
               <div className="absolute bottom-4 left-4 right-4 max-w-sm rounded-2xl bg-card/95 p-6 shadow-soft backdrop-blur-sm sm:bottom-6 sm:left-6">

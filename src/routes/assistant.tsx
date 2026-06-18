@@ -22,10 +22,10 @@ export const Route = createFileRoute("/assistant")({
 });
 
 const prompts = [
-  "My home flooded and I need help with repairs and temporary housing.",
-  "I'm a small business owner who lost inventory in a storm.",
-  "My farm is struggling after months of drought — what aid exists?",
-  "An earthquake damaged my home's foundation. Where do I start?",
+  "My shamba in Nyando has flooded and we need emergency housing and clean water.",
+  "I'm a trader in Mombasa whose shop inventory was destroyed by storm winds.",
+  "My farm in Turkana is struggling after months of severe drought — what NDMA aid exists?",
+  "A landslide swept through our village in West Pokot. Where do I get tents and food?",
 ];
 
 function Assistant() {

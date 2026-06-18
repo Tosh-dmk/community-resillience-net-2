@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui/progress";
 import { RouteError, RouteNotFound } from "@/components/route-boundaries";
 import { useAuth } from "@/hooks/use-auth";
 import { myReportsQuery, organizationsQuery, type DisasterReport } from "@/lib/data";
+import { DashboardSkeleton } from "@/components/Skeletons";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
@@ -59,6 +60,10 @@ function Dashboard() {
   const { data: reports = [], isLoading } = useQuery(myReportsQuery(user?.id));
   const { data: orgs = [] } = useQuery(organizationsQuery());
 
+  if (isLoading) {
+    return <DashboardSkeleton />;
+  }
+
   const firstName =
     (user?.user_metadata?.full_name as string | undefined)?.split(" ")[0] ??
     user?.email?.split("@")[0] ??
@@ -86,9 +91,7 @@ function Dashboard() {
           </Button>
         </div>
 
-        {isLoading ? (
-          <p className="mt-12 text-muted-foreground">Loading your reports…</p>
-        ) : reports.length === 0 ? (
+        {reports.length === 0 ? (
           <div className="mt-10 rounded-3xl border border-dashed border-border bg-card p-10 text-center">
             <h2 className="font-serif text-xl font-semibold text-foreground">
               Let's start your recovery

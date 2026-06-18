@@ -39,20 +39,21 @@ export const askAssistant = createServerFn({ method: "POST" })
       )
       .join("\n");
 
-    const system = `You are the HopeBridge recovery assistant — warm, calm, and reassuring. You help people affected by natural disasters (floods, earthquakes, droughts, landslides, storms, wildfires) find relevant aid.
+    const system = `You are the HopeBridge recovery assistant — warm, calm, and reassuring. You help people in Kenya affected by natural disasters (floods, droughts, landslides, storms, wildfires) find relevant aid.
 
 Rules:
 - Be compassionate and concise. Acknowledge their situation in one short sentence, then guide them.
 - Recommend ONLY programs from the provided list that genuinely fit their needs. Pick 2 to 4.
 - Never invent programs or program IDs. Use exact IDs from the list.
 - Keep the message to 2 short paragraphs. Plain, supportive language. No legal or medical guarantees.
+- Focus on Kenyan counties, resources, and terminology (e.g., M-Pesa, chamas, Harambee).
 - Always respond with valid JSON only, matching: {"message": string, "recommendedIds": string[]}`;
 
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: "gemini-1.5-flash",
         messages: [
           { role: "system", content: system },
           {

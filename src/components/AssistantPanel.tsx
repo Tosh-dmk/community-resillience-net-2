@@ -45,7 +45,7 @@ export function AssistantPanel({ initialSituation = "" }: { initialSituation?: s
               id="situation"
               value={situation}
               onChange={(e) => setSituation(e.target.value)}
-              placeholder="I need help with home repairs and temporary housing after a flood in Asheville..."
+              placeholder="I need help with farming seeds and temporary shelter after flooding in Kisumu..."
               rows={3}
               maxLength={2000}
               className="resize-none border-0 bg-transparent px-0 text-base shadow-none focus-visible:ring-0"

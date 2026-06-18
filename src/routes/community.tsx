@@ -5,6 +5,7 @@ import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
 import { RouteError, RouteNotFound } from "@/components/route-boundaries";
 import { supportGroupsQuery } from "@/lib/data";
+import { CommunitySkeleton } from "@/components/Skeletons";
 
 export const Route = createFileRoute("/community")({
   head: () => ({
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/community")({
   loader: ({ context }) => {
     context.queryClient.ensureQueryData(supportGroupsQuery());
   },
+  pendingComponent: CommunitySkeleton,
   component: Community,
   errorComponent: RouteError,
   notFoundComponent: RouteNotFound,

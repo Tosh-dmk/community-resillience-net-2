@@ -12,6 +12,7 @@ import {
 import { PageShell } from "@/components/PageShell";
 import { RouteError, RouteNotFound } from "@/components/route-boundaries";
 import { reliefUpdatesQuery } from "@/lib/data";
+import { ResourcesSkeleton } from "@/components/Skeletons";
 
 export const Route = createFileRoute("/resources")({
   head: () => ({
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/resources")({
   loader: ({ context }) => {
     context.queryClient.ensureQueryData(reliefUpdatesQuery());
   },
+  pendingComponent: ResourcesSkeleton,
   component: Resources,
   errorComponent: RouteError,
   notFoundComponent: RouteNotFound,
@@ -37,37 +39,37 @@ const guides = [
   {
     icon: ShieldAlert,
     title: "Immediately after a disaster",
-    body: "Safety first: how to check for hazards, document damage, and reach emergency services.",
+    body: "Safety first: check for hazards, document damage, and contact local chiefs or Kenya Red Cross.",
     tag: "Safety",
   },
   {
     icon: FileCheck,
-    title: "Filing insurance & FEMA claims",
-    body: "A clear checklist for documenting losses and submitting claims without delays.",
+    title: "Filing insurance & government claims",
+    body: "Step-by-step checklist for logging losses and registering for aid at nearby Huduma Centers.",
     tag: "Paperwork",
   },
   {
     icon: Home,
-    title: "Finding temporary housing",
-    body: "Options for shelter, rental assistance, and relocation support while you rebuild.",
+    title: "Finding temporary shelter",
+    body: "Accessing local schools, church shelters, and government relocation spaces while you rebuild.",
     tag: "Housing",
   },
   {
     icon: Banknote,
-    title: "Applying for grants & loans",
-    body: "Understand eligibility, gather documents, and avoid common application mistakes.",
+    title: "Applying for NDMA & NGO aid",
+    body: "How to register for the Hunger Safety Net Programme (HSNP) cash transfers and NGO rebuilding grants.",
     tag: "Funding",
   },
   {
     icon: HeartPulse,
-    title: "Caring for your wellbeing",
-    body: "Recovery is emotional too. Resources for stress, grief, and mental health support.",
+    title: "Community chamas & support",
+    body: "Leveraging self-help groups, local Harambees, and community networks to share reconstruction resources.",
     tag: "Wellbeing",
   },
   {
     icon: BookOpen,
     title: "Rebuilding stronger",
-    body: "Resilient construction tips and how to find trustworthy contractors.",
+    body: "Resilient building advice for flood plains (elevated structures) and drought-resistant soil rehabilitation.",
     tag: "Rebuilding",
   },
 ];
