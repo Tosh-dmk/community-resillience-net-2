@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { useMutation } from "@tanstack/react-query";
-import { Sparkles, Send, Loader2 } from "lucide-react";
+import { Sparkles, Send, Loader2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { askAssistant, type RecommendedOrg } from "@/lib/assistant.functions";
@@ -13,8 +13,21 @@ const categoryLabel: Record<RecommendedOrg["category"], string> = {
   donor: "Donor",
 };
 
-export function AssistantPanel({ initialSituation = "" }: { initialSituation?: string }) {
-  const [situation, setSituation] = useState(initialSituation);
+export function AssistantPanel({
+  initialSituation = "",
+  situation: controlledSituation,
+  setSituation: controlledSetSituation,
+}: {
+  initialSituation?: string;
+  situation?: string;
+  setSituation?: (val: string) => void;
+}) {
+  const [internalSituation, setInternalSituation] = useState(initialSituation);
+  const isControlled = controlledSituation !== undefined && controlledSetSituation !== undefined;
+  
+  const situation = isControlled ? controlledSituation : internalSituation;
+  const setSituation = isControlled ? controlledSetSituation : setInternalSituation;
+
   const callAssistant = useServerFn(askAssistant);
 
   const mutation = useMutation({
@@ -92,7 +105,7 @@ export function AssistantPanel({ initialSituation = "" }: { initialSituation?: s
               {mutation.data.recommended.map((org) => (
                 <div
                   key={org.id}
-                  className="rounded-2xl border border-border bg-card p-5"
+                  className="flex flex-col rounded-2xl border border-border bg-card p-5"
                 >
                   <div className="mb-2 flex items-center justify-between gap-2">
                     <span className="rounded-full bg-brand-100 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-brand-800">
@@ -107,7 +120,16 @@ export function AssistantPanel({ initialSituation = "" }: { initialSituation?: s
                   <h4 className="font-serif text-lg font-semibold text-foreground">
                     {org.name}
                   </h4>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{org.description}</p>
+                  <p className="mt-1.5 flex-1 text-sm text-muted-foreground">{org.description}</p>
+                  {org.website && (
+                    <div className="mt-4 flex justify-end border-t border-border pt-3">
+                      <Button size="sm" className="rounded-full h-8 px-3 text-xs" asChild>
+                        <a href={org.website} target="_blank" rel="noopener noreferrer">
+                          Apply <ExternalLink className="ml-1.5 size-3" />
+                        </a>
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

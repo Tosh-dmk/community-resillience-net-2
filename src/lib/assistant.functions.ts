@@ -14,10 +14,11 @@ export type RecommendedOrg = {
   description: string;
   amount_label: string | null;
   region: string;
+  website: string | null;
 };
 
 export const askAssistant = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => Input.parse(d))
+  .validator((d: unknown) => Input.parse(d))
   .handler(async ({ data }): Promise<{ message: string; recommended: RecommendedOrg[] }> => {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) throw new Error("The assistant is not configured yet.");
@@ -30,7 +31,7 @@ export const askAssistant = createServerFn({ method: "POST" })
 
     const { data: orgs } = await supabase
       .from("aid_organizations")
-      .select("id,name,category,description,amount_label,region,tags");
+      .select("id,name,category,description,amount_label,region,tags,website");
 
     // Fallback to Kenyan catalog if DB is not seeded or has US data
     const activeOrgs =
@@ -46,6 +47,7 @@ export const askAssistant = createServerFn({ method: "POST" })
               amount_label: "Emergency Aid",
               region: "National",
               tags: ["emergency", "shelter"],
+              website: "https://www.redcross.or.ke",
             },
             {
               id: "d469be28-bbf0-4eff-bf9a-088984949e16",
@@ -56,6 +58,7 @@ export const askAssistant = createServerFn({ method: "POST" })
               amount_label: "Up to KES 20,000",
               region: "National",
               tags: ["drought", "grants"],
+              website: "https://www.ndma.go.ke",
             },
             {
               id: "4db6356c-bad5-4abc-87b2-4f1b8d7a9188",
@@ -66,6 +69,7 @@ export const askAssistant = createServerFn({ method: "POST" })
               amount_label: "Varies",
               region: "National",
               tags: ["grants", "rebuilding"],
+              website: "https://www.safaricomfoundation.org",
             },
             {
               id: "ministry-devolution",
@@ -76,6 +80,7 @@ export const askAssistant = createServerFn({ method: "POST" })
               amount_label: "In-kind support",
               region: "National",
               tags: ["food", "materials"],
+              website: "https://www.asals.go.ke",
             },
             {
               id: "equity-foundation",
@@ -86,6 +91,7 @@ export const askAssistant = createServerFn({ method: "POST" })
               amount_label: "Up to KES 500,000",
               region: "Rift Valley",
               tags: ["loans", "grants"],
+              website: "https://equitygroupfoundation.org",
             },
             {
               id: "budalangi-rebuild",
@@ -96,6 +102,7 @@ export const askAssistant = createServerFn({ method: "POST" })
               amount_label: "Available now",
               region: "Western Region",
               tags: ["materials", "rebuilding"],
+              website: "https://www.redcross.or.ke",
             },
             {
               id: "actionaid-livelihood",
@@ -106,6 +113,7 @@ export const askAssistant = createServerFn({ method: "POST" })
               amount_label: "Up to KES 50,000",
               region: "Coastal Region",
               tags: ["grants", "housing"],
+              website: "https://kenya.actionaid.org",
             },
             {
               id: "farmers-mutual",
@@ -116,6 +124,7 @@ export const askAssistant = createServerFn({ method: "POST" })
               amount_label: "Volunteer-led",
               region: "Rift Valley",
               tags: ["community", "volunteers"],
+              website: "https://kenaff.org",
             },
           ];
 
@@ -136,27 +145,50 @@ Rules:
 - Focus on Kenyan counties, resources, and terminology (e.g., M-Pesa, chamas, Harambee).
 - Always respond with valid JSON only, matching: {"message": string, "recommendedIds": string[]}`;
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: `My situation: ${data.situation}\n\nAvailable programs:\n${catalog}` }],
-          },
-        ],
-        systemInstruction: {
-          parts: [{ text: system }],
-        },
-        generationConfig: {
-          responseMimeType: "application/json",
-        },
-      }),
-    });
+    const modelsToTry = [
+      "gemini-3.1-flash-lite",
+      "gemini-3.1-flash-lite-preview",
+      "gemini-2.5-flash",
+    ];
 
-    if (res.status === 429)
+    let res: Response | null = null;
+    let fallbackErrorText = "";
+
+    for (const model of modelsToTry) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const attemptRes = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: `My situation: ${data.situation}\n\nAvailable programs:\n${catalog}` }],
+            },
+          ],
+          systemInstruction: {
+            parts: [{ text: system }],
+          },
+          generationConfig: {
+            responseMimeType: "application/json",
+          },
+        }),
+      });
+
+      if (attemptRes.ok || attemptRes.status === 402 || attemptRes.status === 403 || attemptRes.status === 400) {
+        res = attemptRes;
+        break;
+      }
+      
+      fallbackErrorText = await attemptRes.text();
+    }
+
+    if (!res) {
+      console.error("Gemini API exhausted all fallback models. Last error:", fallbackErrorText);
+      throw new Error("The assistant is busy right now. Please try again in a moment.");
+    }
+
+    if (res.status === 429 || res.status === 503)
       throw new Error("The assistant is busy right now. Please try again in a moment.");
     if (res.status === 402)
       throw new Error("AI usage limit reached. Please add credits to keep using the assistant.");
@@ -191,6 +223,7 @@ Rules:
         description: o.description,
         amount_label: o.amount_label ?? null,
         region: o.region,
+        website: o.website ?? null,
       }));
 
     return {

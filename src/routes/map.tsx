@@ -103,7 +103,7 @@ function MapPage() {
                 className="h-[300px] w-full rounded-3xl md:h-[440px]"
               />
               {selected && (
-                <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-card/95 p-6 shadow-soft backdrop-blur-sm sm:left-6 sm:right-auto sm:max-w-sm">
+                <div className="absolute z-[1000] bottom-4 left-4 right-4 rounded-2xl bg-card/95 p-6 shadow-soft backdrop-blur-sm sm:left-6 sm:right-auto sm:max-w-sm">
                   <div className="mb-3 flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-widest text-brand-400">
                       {selected.region}
@@ -119,12 +119,20 @@ function MapPage() {
                   </h2>
                   <p className="mt-1 text-sm text-muted-foreground">{selected.address}</p>
                   <div className="mt-4 flex gap-2">
-                    <Button size="sm" className="flex-1">
-                      <Navigation className="size-4" /> Get Directions
+                    <Button size="sm" className="flex-1" asChild>
+                      <a
+                        href={`https://www.google.com/maps/dir/?api=1&destination=${selected.lat},${selected.lng}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Navigation className="size-4" aria-hidden="true" /> Get Directions
+                      </a>
                     </Button>
                     {selected.phone && (
-                      <Button variant="outline" size="sm" aria-label="Call center">
-                        <Phone className="size-4" /> Call
+                      <Button variant="outline" size="sm" aria-label="Call center" asChild>
+                        <a href={`tel:${selected.phone}`}>
+                          <Phone className="size-4" aria-hidden="true" /> Call
+                        </a>
                       </Button>
                     )}
                   </div>

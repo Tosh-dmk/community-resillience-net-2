@@ -151,7 +151,7 @@ function Index() {
               className="h-[320px] w-full rounded-3xl md:h-[420px]"
             />
             {nearest && (
-              <div className="absolute bottom-4 left-4 right-4 max-w-sm rounded-2xl bg-card/95 p-6 shadow-soft backdrop-blur-sm sm:bottom-6 sm:left-6">
+              <div className="absolute z-[1000] bottom-4 left-4 right-4 max-w-sm rounded-2xl bg-card/95 p-6 shadow-soft backdrop-blur-sm sm:bottom-6 sm:left-6">
                 <div className="mb-4 flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-widest text-brand-400">
                     Nearest Center
@@ -170,13 +170,21 @@ function Index() {
                 </p>
                 <div className="mt-4 flex gap-2">
                   <Button asChild size="sm" className="flex-1">
-                    <Link to="/map">
-                      <Navigation className="size-4" /> Get Directions
-                    </Link>
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${nearest.lat},${nearest.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Navigation className="size-4" aria-hidden="true" /> Get Directions
+                    </a>
                   </Button>
-                  <Button variant="outline" size="sm" aria-label="Call center">
-                    <Phone className="size-4" />
-                  </Button>
+                  {nearest.phone && (
+                    <Button variant="outline" size="sm" aria-label="Call center" asChild>
+                      <a href={`tel:${nearest.phone}`}>
+                        <Phone className="size-4" aria-hidden="true" />
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </div>
             )}

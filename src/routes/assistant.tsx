@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Sparkles } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
@@ -29,6 +30,8 @@ const prompts = [
 ];
 
 function Assistant() {
+  const [situation, setSituation] = useState("");
+
   return (
     <PageShell>
       <div className="mx-auto max-w-3xl px-4 py-12">
@@ -46,7 +49,7 @@ function Assistant() {
         </header>
 
         <div className="mt-10">
-          <AssistantPanel />
+          <AssistantPanel situation={situation} setSituation={setSituation} />
         </div>
 
         <div className="mt-8">
@@ -55,12 +58,14 @@ function Assistant() {
           </p>
           <div className="flex flex-wrap gap-2">
             {prompts.map((p) => (
-              <span
+              <button
                 key={p}
-                className="rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground"
+                type="button"
+                onClick={() => setSituation(p)}
+                className="rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground hover:bg-accent hover:text-foreground cursor-pointer transition-colors text-left font-normal"
               >
                 {p}
-              </span>
+              </button>
             ))}
           </div>
         </div>

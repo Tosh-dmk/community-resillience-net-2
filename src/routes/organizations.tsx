@@ -159,9 +159,17 @@ function Organizations() {
                     </span>
                   )}
                 </div>
-                <Button size="sm" className="rounded-full">
-                  Apply <ExternalLink className="size-3.5" />
-                </Button>
+                {o.website ? (
+                  <Button size="sm" className="rounded-full" asChild>
+                    <a href={o.website} target="_blank" rel="noopener noreferrer">
+                      Apply <ExternalLink className="size-3.5" aria-hidden="true" />
+                    </a>
+                  </Button>
+                ) : (
+                  <Button size="sm" className="rounded-full" disabled>
+                    Apply <ExternalLink className="size-3.5" aria-hidden="true" />
+                  </Button>
+                )}
               </div>
             </article>
           ))}
