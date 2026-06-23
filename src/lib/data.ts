@@ -45,7 +45,11 @@ const KENYAN_ORGS: Organization[] = [
     amount_label: "Varies",
     deadline: "Ongoing",
     verified: true,
+<<<<<<<< <Temporary merge branch 1
+    website: "https://foundation.safaricom.co.ke",
+=========
     website: "https://www.safaricomfoundation.org/",
+>>>>>>>>> Temporary merge branch 2
     tags: ["grants", "rebuilding", "medical"],
     created_at: new Date().toISOString(),
   },
@@ -58,7 +62,11 @@ const KENYAN_ORGS: Organization[] = [
     amount_label: "In-kind support",
     deadline: "Ongoing",
     verified: true,
+<<<<<<<<< Temporary merge branch 1
+    website: "https://meac.go.ke",
+=========
     website: "https://www.devolution.go.ke/",
+>>>>>>>>> Temporary merge branch 2
     tags: ["food", "materials", "emergency"],
     created_at: new Date().toISOString(),
   },
@@ -71,7 +79,11 @@ const KENYAN_ORGS: Organization[] = [
     amount_label: "Up to KES 500,000",
     deadline: "Dec 31",
     verified: true,
+<<<<<<<<< Temporary merge branch 1
+    website: "https://equitygroupholdings.com",
+=========
     website: "https://equitygroupholdings.com/foundation/",
+>>>>>>>>> Temporary merge branch 2
     tags: ["loans", "grants", "agriculture"],
     created_at: new Date().toISOString(),
   },
@@ -84,7 +96,11 @@ const KENYAN_ORGS: Organization[] = [
     amount_label: "Available now",
     deadline: "Ongoing",
     verified: true,
+<<<<<<<<< Temporary merge branch 1
+    website: "https://www.busiacounty.go.ke",
+=========
     website: "https://www.busiacounty.go.ke/",
+>>>>>>>>> Temporary merge branch 2
     tags: ["materials", "rebuilding", "flood"],
     created_at: new Date().toISOString(),
   },
@@ -97,7 +113,11 @@ const KENYAN_ORGS: Organization[] = [
     amount_label: "Up to KES 50,000",
     deadline: "Ongoing",
     verified: true,
+<<<<<<<<< Temporary merge branch 1
+    website: "https://actionaid-kenya.org",
+=========
     website: "https://actionaid-kenya.org/",
+>>>>>>>>> Temporary merge branch 2
     tags: ["grants", "housing", "community"],
     created_at: new Date().toISOString(),
   },
@@ -110,7 +130,11 @@ const KENYAN_ORGS: Organization[] = [
     amount_label: "Volunteer-led",
     deadline: "Ongoing",
     verified: true,
+<<<<<<<<< Temporary merge branch 1
+    website: "https://www.kenaff.org",
+=========
     website: "https://www.kenaff.org/",
+>>>>>>>>> Temporary merge branch 2
     tags: ["community", "volunteers", "food", "drought"],
     created_at: new Date().toISOString(),
   },
