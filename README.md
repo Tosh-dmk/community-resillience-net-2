@@ -1,5 +1,7 @@
 # HopeBridge — Climate Finance & Community Resilience Platform
 
+**Live Deployment:** [https://hope-bridge-ten.vercel.app/](https://hope-bridge-ten.vercel.app/)
+
 HopeBridge is a modern, high-fidelity web application and offline-first USSD gateway designed to bridge the gap between climate-disaster recovery needs, community resilience, and active funding pipelines in Kenya.
 
 The platform is designed around a core thesis: **Climate disasters happen. Recovery funding exists. HopeBridge connects the two.** It serves as a unified marketplace for climate grants, mutual aid, step-by-step recovery plans, interactive hazard maps, and a fully featured operations portal for NGOs and local governments.
@@ -9,6 +11,8 @@ To showcase how critical aid reaches offline and disconnected rural communities,
 ---
 
 ## Live Hackathon & Demo Sandbox (Zero-Setup Required)
+
+**Hosted Demo:** You can access the live application at [hope-bridge-ten.vercel.app](https://hope-bridge-ten.vercel.app/).
 
 The application features a built-in global **Demo Panel** (floating trigger at the bottom-right of the viewport) designed to showcase complex disaster and funding flows instantly without requiring third-party API keys, SMS gateway configurations, or live database setups:
 
