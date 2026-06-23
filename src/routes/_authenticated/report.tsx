@@ -116,9 +116,10 @@ function ReportPage() {
         setSpecificLocation("Nyando Basin");
         setSeverity([4]);
         setNeeds(["Temporary housing", "Food & clean water", "Medical aid"]);
-        
+
         // Typing effect for description
-        const descText = "Heavy seasonal rains have caused the Nyando River to burst its banks. Over 200 homesteads are completely submerged, crops destroyed, and families have evacuated to Ahero Multipurpose Center. We need immediate tents, blankets, water treatment kits, and hot meals.";
+        const descText =
+          "Heavy seasonal rains have caused the Nyando River to burst its banks. Over 200 homesteads are completely submerged, crops destroyed, and families have evacuated to Ahero Multipurpose Center. We need immediate tents, blankets, water treatment kits, and hot meals.";
         let currentText = "";
         let index = 0;
         const interval = setInterval(() => {
@@ -139,7 +140,8 @@ function ReportPage() {
         setNeeds(["M-Pesa cash assistance", "Food & clean water", "Counseling & mental health"]);
 
         // Typing effect
-        const descText = "Severe water scarcity and dry spells have completely depleted animal pastures. Over 80% of our cattle have died. Families are struggling to survive on one meal per day. We require immediate food supplies, water trucking, and direct M-Pesa cash grants.";
+        const descText =
+          "Severe water scarcity and dry spells have completely depleted animal pastures. Over 80% of our cattle have died. Families are struggling to survive on one meal per day. We require immediate food supplies, water trucking, and direct M-Pesa cash grants.";
         let currentText = "";
         let index = 0;
         const interval = setInterval(() => {
@@ -161,7 +163,9 @@ function ReportPage() {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const fullLoc = county ? `${county} County${specificLocation ? `, ${specificLocation}` : ""}` : specificLocation;
+      const fullLoc = county
+        ? `${county} County${specificLocation ? `, ${specificLocation}` : ""}`
+        : specificLocation;
       const parsed = reportSchema.parse({
         disaster_type: disasterType,
         location: fullLoc,
@@ -189,7 +193,7 @@ function ReportPage() {
               title: "HopeBridge Support Team",
               body: `We have received your report for ${county} County. Emergency resources are coordinating. View matched aid programs on your dashboard.`,
             },
-          })
+          }),
         );
       }, 1500);
 
@@ -201,9 +205,7 @@ function ReportPage() {
   });
 
   const toggleNeed = (need: string) =>
-    setNeeds((prev) =>
-      prev.includes(need) ? prev.filter((n) => n !== need) : [...prev, need],
-    );
+    setNeeds((prev) => (prev.includes(need) ? prev.filter((n) => n !== need) : [...prev, need]));
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -226,8 +228,8 @@ function ReportPage() {
             Report disaster damage
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Share what happened and what you need. The more detail you provide, the better
-            we can match you with the right aid.
+            Share what happened and what you need. The more detail you provide, the better we can
+            match you with the right aid.
           </p>
         </header>
 
@@ -237,10 +239,7 @@ function ReportPage() {
         >
           <div>
             <Label htmlFor="disaster_type">Type of disaster</Label>
-            <Select
-              value={disasterType}
-              onValueChange={(v) => setDisasterType(v as DisasterType)}
-            >
+            <Select value={disasterType} onValueChange={(v) => setDisasterType(v as DisasterType)}>
               <SelectTrigger id="disaster_type" className="mt-1.5">
                 <SelectValue placeholder="Select a disaster type" />
               </SelectTrigger>
@@ -257,10 +256,7 @@ function ReportPage() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <Label htmlFor="county">County</Label>
-              <Select
-                value={county}
-                onValueChange={setCounty}
-              >
+              <Select value={county} onValueChange={setCounty}>
                 <SelectTrigger id="county" className="mt-1.5">
                   <SelectValue placeholder="Select County" />
                 </SelectTrigger>

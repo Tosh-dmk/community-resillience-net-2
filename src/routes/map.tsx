@@ -45,13 +45,15 @@ function MapPage() {
               Assistance near you
             </h1>
             <p className="mt-3 text-muted-foreground">
-              Shelters, supply points, and recovery hubs — with the services they offer right
-              now.
+              Shelters, supply points, and recovery hubs — with the services they offer right now.
             </p>
           </div>
           <div className="flex items-center gap-2 self-start sm:self-center bg-card border border-border rounded-full px-4 py-2 shadow-sm shrink-0">
             <span className="text-xs font-bold text-red-500 animate-pulse">●</span>
-            <label htmlFor="hazards-toggle" className="text-xs font-semibold text-muted-foreground uppercase cursor-pointer select-none">
+            <label
+              htmlFor="hazards-toggle"
+              className="text-xs font-semibold text-muted-foreground uppercase cursor-pointer select-none"
+            >
               Show Hazard Alerts
             </label>
             <input

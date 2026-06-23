@@ -10,9 +10,27 @@ interface InteractiveMapProps {
 }
 
 const MOCK_HAZARDS = [
-  { id: "h1", name: "Active Flooding - Nyando River Basin", lat: -0.174, lng: 34.92, description: "River Nyando burst its banks. Flooding in low-lying villages." },
-  { id: "h2", name: "Flash Flooding - Nairobi Mathare", lat: -1.2655, lng: 36.8574, description: "Severe urban floods. Heavy drainage overflow reported." },
-  { id: "h3", name: "Landslide Risk - West Pokot", lat: 1.239, lng: 35.122, description: "Mudslides reported along Kapenguria-Lodwar Highway." },
+  {
+    id: "h1",
+    name: "Active Flooding - Nyando River Basin",
+    lat: -0.174,
+    lng: 34.92,
+    description: "River Nyando burst its banks. Flooding in low-lying villages.",
+  },
+  {
+    id: "h2",
+    name: "Flash Flooding - Nairobi Mathare",
+    lat: -1.2655,
+    lng: 36.8574,
+    description: "Severe urban floods. Heavy drainage overflow reported.",
+  },
+  {
+    id: "h3",
+    name: "Landslide Risk - West Pokot",
+    lat: 1.239,
+    lng: 35.122,
+    description: "Mudslides reported along Kapenguria-Lodwar Highway.",
+  },
 ];
 
 export function InteractiveMap({
@@ -37,7 +55,7 @@ export function InteractiveMap({
     const initMap = async () => {
       try {
         L = await import("leaflet");
-        
+
         // If map is already initialized, skip initialization
         if (leafletMapRef.current) return;
 

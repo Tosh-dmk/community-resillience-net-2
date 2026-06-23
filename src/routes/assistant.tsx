@@ -43,8 +43,8 @@ function Assistant() {
             Find the right aid, faster
           </h1>
           <p className="mt-3 text-muted-foreground">
-            Tell us what happened and what you need. Our assistant will match you with
-            relevant programs and support.
+            Tell us what happened and what you need. Our assistant will match you with relevant
+            programs and support.
           </p>
         </header>
 

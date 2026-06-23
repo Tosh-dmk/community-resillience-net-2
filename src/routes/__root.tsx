@@ -152,8 +152,8 @@ function RootComponent() {
       <ThemeProvider>
         <AuthProvider>
           {isNavigating && (
-            <div 
-              className="fixed top-0 left-0 right-0 h-[3px] bg-accent z-[9999] animate-pulse" 
+            <div
+              className="fixed top-0 left-0 right-0 h-[3px] bg-accent z-[9999] animate-pulse"
               style={{
                 boxShadow: "0 1px 8px var(--accent)",
               }}
@@ -169,12 +169,12 @@ function RootComponent() {
 
           {/* Centered global USSD Phone simulator with blurred background */}
           {isUssdOpen && (
-            <div 
+            <div
               onClick={() => setIsUssdOpen(false)}
               className="fixed inset-0 z-[99999] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer"
             >
-              <div 
-                onClick={(e) => e.stopPropagation()} 
+              <div
+                onClick={(e) => e.stopPropagation()}
                 className="relative animate-in zoom-in-95 duration-200 cursor-default"
               >
                 <UssdSimulator onClose={() => setIsUssdOpen(false)} />

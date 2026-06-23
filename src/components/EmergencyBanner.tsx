@@ -96,9 +96,7 @@ export function EmergencyBanner() {
   return (
     <div
       className={`relative flex items-center justify-between gap-2 px-4 py-2.5 text-xs font-medium transition-all ${
-        isHigh
-          ? "bg-red-600 text-white"
-          : "bg-amber-500 text-white"
+        isHigh ? "bg-red-600 text-white" : "bg-amber-500 text-white"
       }`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

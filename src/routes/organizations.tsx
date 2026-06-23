@@ -78,8 +78,8 @@ function Organizations() {
             Verified aid &amp; funding
           </h1>
           <p className="mt-3 text-muted-foreground">
-            Every organization listed here is vetted. Search by need, location, or program
-            type to find the right support.
+            Every organization listed here is vetted. Search by need, location, or program type to
+            find the right support.
           </p>
         </header>
 
@@ -128,10 +128,7 @@ function Organizations() {
               <div className="mt-4 flex items-center gap-1.5">
                 <h2 className="font-semibold text-foreground">{o.name}</h2>
                 {o.verified && (
-                  <ShieldCheck
-                    className="size-4 text-accent"
-                    aria-label="Verified organization"
-                  />
+                  <ShieldCheck className="size-4 text-accent" aria-label="Verified organization" />
                 )}
               </div>
               <p className="mt-2 flex-1 text-sm text-muted-foreground">{o.description}</p>

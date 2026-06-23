@@ -14,7 +14,8 @@ const KENYAN_ORGS: Organization[] = [
     id: "607aec41-f3d9-451b-b7d9-551112268eb4",
     name: "Kenya Red Cross Society (KRCS)",
     category: "non_profit",
-    description: "Emergency rescue, first aid, temporary tents, water purification, and survival kit distribution across flood and landslide hit counties.",
+    description:
+      "Emergency rescue, first aid, temporary tents, water purification, and survival kit distribution across flood and landslide hit counties.",
     region: "National",
     amount_label: "Emergency Aid",
     deadline: "Ongoing",
@@ -27,7 +28,8 @@ const KENYAN_ORGS: Organization[] = [
     id: "d469be28-bbf0-4eff-bf9a-088984949e16",
     name: "NDMA Drought Cash Transfers",
     category: "government",
-    description: "Cash disbursements via the Hunger Safety Net Programme (HSNP) to registered vulnerable families in Arid and Semi-Arid Land (ASAL) counties.",
+    description:
+      "Cash disbursements via the Hunger Safety Net Programme (HSNP) to registered vulnerable families in Arid and Semi-Arid Land (ASAL) counties.",
     region: "National",
     amount_label: "Up to KES 20,000",
     deadline: "Rolling",
@@ -40,7 +42,8 @@ const KENYAN_ORGS: Organization[] = [
     id: "4db6356c-bad5-4abc-87b2-4f1b8d7a9188",
     name: "Safaricom Foundation Disaster Grant",
     category: "donor",
-    description: "Support for local community groups, reconstruction of schools and hospitals, and mobile money aid transfers.",
+    description:
+      "Support for local community groups, reconstruction of schools and hospitals, and mobile money aid transfers.",
     region: "National",
     amount_label: "Varies",
     deadline: "Ongoing",
@@ -53,7 +56,8 @@ const KENYAN_ORGS: Organization[] = [
     id: "ministry-devolution",
     name: "Ministry of Devolution and ASALs Relief",
     category: "government",
-    description: "Government food distribution networks, iron sheets for roofing rebuilds, and direct relief supplies.",
+    description:
+      "Government food distribution networks, iron sheets for roofing rebuilds, and direct relief supplies.",
     region: "National",
     amount_label: "In-kind support",
     deadline: "Ongoing",
@@ -66,7 +70,8 @@ const KENYAN_ORGS: Organization[] = [
     id: "equity-foundation",
     name: "Equity Group Foundation Recovery Loans",
     category: "non_profit",
-    description: "Rehabilitation loans and agricultural inputs grants for smallholder farmers and businesses affected by climate shocks.",
+    description:
+      "Rehabilitation loans and agricultural inputs grants for smallholder farmers and businesses affected by climate shocks.",
     region: "Rift Valley",
     amount_label: "Up to KES 500,000",
     deadline: "Dec 31",
@@ -79,7 +84,8 @@ const KENYAN_ORGS: Organization[] = [
     id: "budalangi-rebuild",
     name: "Budalangi Flood Rebuild Fund",
     category: "community",
-    description: "Crowdfunded local building materials pool (timber, cement, roofing sheets) managed by community elders.",
+    description:
+      "Crowdfunded local building materials pool (timber, cement, roofing sheets) managed by community elders.",
     region: "Western Region",
     amount_label: "Available now",
     deadline: "Ongoing",
@@ -92,7 +98,8 @@ const KENYAN_ORGS: Organization[] = [
     id: "actionaid-livelihood",
     name: "ActionAid Kenya Livelihood Grants",
     category: "non_profit",
-    description: "Direct recovery cash transfers and rebuilding materials focusing on vulnerable women and child-headed households.",
+    description:
+      "Direct recovery cash transfers and rebuilding materials focusing on vulnerable women and child-headed households.",
     region: "Coastal Region",
     amount_label: "Up to KES 50,000",
     deadline: "Ongoing",
@@ -105,7 +112,8 @@ const KENYAN_ORGS: Organization[] = [
     id: "farmers-mutual",
     name: "Kenya Farmers Mutual Aid Chama",
     category: "community",
-    description: "Grassroots mutual support coordinating seed distribution, tractor sharing, and soil recovery volunteers.",
+    description:
+      "Grassroots mutual support coordinating seed distribution, tractor sharing, and soil recovery volunteers.",
     region: "Rift Valley",
     amount_label: "Volunteer-led",
     deadline: "Ongoing",
@@ -120,7 +128,8 @@ const KENYAN_GROUPS: SupportGroup[] = [
   {
     id: "g1",
     name: "Flood Survivors - Budalangi & Nyando",
-    description: "A chama-style support circle for those rebuilding after floods in Busia, Kisumu, and Tana River.",
+    description:
+      "A chama-style support circle for those rebuilding after floods in Busia, Kisumu, and Tana River.",
     topic: "Flood Recovery",
     region: "Western Region",
     member_count: 1420,
@@ -129,7 +138,8 @@ const KENYAN_GROUPS: SupportGroup[] = [
   {
     id: "g2",
     name: "Drought Resilience ASAL Network",
-    description: "Connect with pastoralists and dryland farmers sharing water management tips and NDMA relief updates.",
+    description:
+      "Connect with pastoralists and dryland farmers sharing water management tips and NDMA relief updates.",
     topic: "Drought",
     region: "Northern Kenya",
     member_count: 945,
@@ -138,7 +148,8 @@ const KENYAN_GROUPS: SupportGroup[] = [
   {
     id: "g3",
     name: "Landslide Support - West Pokot & Muranga",
-    description: "Community help, contractor references, and mutual aid for land restoration in landslide-prone hilly areas.",
+    description:
+      "Community help, contractor references, and mutual aid for land restoration in landslide-prone hilly areas.",
     topic: "Landslide",
     region: "Rift Valley",
     member_count: 388,
@@ -147,7 +158,8 @@ const KENYAN_GROUPS: SupportGroup[] = [
   {
     id: "g4",
     name: "Nairobi Urban Flood Help",
-    description: "Coordination of rescue, volunteer cleanups, and emergency shelter sharing in Nairobi estates.",
+    description:
+      "Coordination of rescue, volunteer cleanups, and emergency shelter sharing in Nairobi estates.",
     topic: "Storm",
     region: "Nairobi",
     member_count: 2105,
@@ -156,7 +168,8 @@ const KENYAN_GROUPS: SupportGroup[] = [
   {
     id: "g5",
     name: "Volunteers & Helpers Kenya Hub",
-    description: "For volunteers offering M-Pesa donations, transport, construction skills, and sorting relief items.",
+    description:
+      "For volunteers offering M-Pesa donations, transport, construction skills, and sorting relief items.",
     topic: "Volunteering",
     region: "National",
     member_count: 3560,
@@ -165,7 +178,8 @@ const KENYAN_GROUPS: SupportGroup[] = [
   {
     id: "g6",
     name: "Community Mental Health & Support Kenya",
-    description: "A safe, compassionate counseling and trauma recovery space led by local mental health volunteers.",
+    description:
+      "A safe, compassionate counseling and trauma recovery space led by local mental health volunteers.",
     topic: "Wellbeing",
     region: "National",
     member_count: 1224,
@@ -310,7 +324,11 @@ export const supportGroupsQuery = () =>
           .select("*")
           .order("member_count", { ascending: false });
         if (error) throw error;
-        if (!data || data.length === 0 || data.some((g) => g.name.includes("Flood Survivors Together"))) {
+        if (
+          !data ||
+          data.length === 0 ||
+          data.some((g) => g.name.includes("Flood Survivors Together"))
+        ) {
           return KENYAN_GROUPS;
         }
         return data;

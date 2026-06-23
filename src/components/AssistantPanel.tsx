@@ -24,7 +24,7 @@ export function AssistantPanel({
 }) {
   const [internalSituation, setInternalSituation] = useState(initialSituation);
   const isControlled = controlledSituation !== undefined && controlledSetSituation !== undefined;
-  
+
   const situation = isControlled ? controlledSituation : internalSituation;
   const setSituation = isControlled ? controlledSetSituation : setInternalSituation;
 
@@ -117,9 +117,7 @@ export function AssistantPanel({
                       </span>
                     )}
                   </div>
-                  <h4 className="font-serif text-lg font-semibold text-foreground">
-                    {org.name}
-                  </h4>
+                  <h4 className="font-serif text-lg font-semibold text-foreground">{org.name}</h4>
                   <p className="mt-1.5 flex-1 text-sm text-muted-foreground">{org.description}</p>
                   {org.website && (
                     <div className="mt-4 flex justify-end border-t border-border pt-3">

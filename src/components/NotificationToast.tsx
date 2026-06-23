@@ -53,12 +53,12 @@ export function NotificationToast() {
       const accountPaid = stk.account;
       setStk(null);
       setPin("");
-      
+
       // Dispatch success back to any listeners
       window.dispatchEvent(
         new CustomEvent("demo:stk-success", {
           detail: { message: "STK push processed successfully!" },
-        })
+        }),
       );
     }, 1500);
   };
@@ -98,13 +98,14 @@ export function NotificationToast() {
               <ShieldAlert className="size-5 text-emerald-600 animate-pulse" />
               <span className="font-bold text-lg tracking-wider text-emerald-700">M-PESA</span>
             </div>
-            
+
             <form onSubmit={handlePinSubmit} className="space-y-4 text-center">
               <p className="text-xs leading-relaxed font-semibold">
-                Pay KES {stk.amount.toLocaleString()} to {stk.account} Account?<br />
+                Pay KES {stk.amount.toLocaleString()} to {stk.account} Account?
+                <br />
                 Enter your M-Pesa PIN:
               </p>
-              
+
               <input
                 type="password"
                 maxLength={4}

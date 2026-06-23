@@ -50,7 +50,10 @@ function GroupPortalModal({ group, onClose }: { group: any; onClose: () => void 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
     if (!chatMsg.trim()) return;
-    setMessages([...messages, { id: Date.now(), user: "You", text: chatMsg.trim(), time: "Just now" }]);
+    setMessages([
+      ...messages,
+      { id: Date.now(), user: "You", text: chatMsg.trim(), time: "Just now" },
+    ]);
     setChatMsg("");
   };
 
@@ -175,8 +178,8 @@ function Community() {
             You're part of a community
           </h1>
           <p className="mt-3 text-muted-foreground">
-            Connect with people who understand what you're going through. Share resources,
-            ask questions, and lend a hand where you can.
+            Connect with people who understand what you're going through. Share resources, ask
+            questions, and lend a hand where you can.
           </p>
         </header>
 
@@ -195,9 +198,7 @@ function Community() {
                   {g.member_count.toLocaleString()}
                 </span>
               </div>
-              <h2 className="mt-4 font-serif text-xl font-semibold text-foreground">
-                {g.name}
-              </h2>
+              <h2 className="mt-4 font-serif text-xl font-semibold text-foreground">{g.name}</h2>
               <p className="mt-2 flex-1 text-sm text-muted-foreground">{g.description}</p>
               <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
                 <span className="text-xs text-muted-foreground">{g.region}</span>
@@ -219,8 +220,7 @@ function Community() {
                 Want to help others rebuild?
               </h2>
               <p className="mt-2 text-primary-foreground/75">
-                Offer your time, tools, or skills. Volunteers are the backbone of every
-                recovery.
+                Offer your time, tools, or skills. Volunteers are the backbone of every recovery.
               </p>
             </div>
             <Button asChild size="lg" variant="secondary" className="rounded-full">

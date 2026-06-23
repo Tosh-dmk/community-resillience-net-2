@@ -117,7 +117,7 @@ export function CommunitySkeleton() {
     <PageShell>
       <div className="mx-auto max-w-7xl px-4 py-12 space-y-8">
         <PageHeaderSkeleton />
-        
+
         {/* Support Groups Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -165,7 +165,10 @@ export function FundingSkeleton() {
         {/* Crowdfunding campaigns grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="rounded-3xl border border-border bg-card p-6 shadow-sm space-y-4">
+            <div
+              key={i}
+              className="rounded-3xl border border-border bg-card p-6 shadow-sm space-y-4"
+            >
               <div className="h-5 w-3/4 rounded bg-muted/60 animate-pulse" />
               <div className="h-4 w-1/3 rounded bg-muted/40 animate-pulse" />
               <div className="space-y-2">

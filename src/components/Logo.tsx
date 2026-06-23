@@ -7,9 +7,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       <img
         src={logoImg}
         alt=""
-        className={`rounded-lg object-contain ${
-          compact ? "size-6" : "size-8"
-        }`}
+        className={`rounded-lg object-contain ${compact ? "size-6" : "size-8"}`}
       />
       <span
         className={`font-serif font-semibold tracking-tight text-foreground ${

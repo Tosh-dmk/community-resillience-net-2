@@ -15,10 +15,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const root = resolve(__dirname, "..");
-const funcDir = resolve(
-  root,
-  ".vercel/output/functions/__server.func"
-);
+const funcDir = resolve(root, ".vercel/output/functions/__server.func");
 
 // Read tslib ESM source
 const tslibPath = resolve(root, "node_modules/tslib/tslib.es6.mjs");

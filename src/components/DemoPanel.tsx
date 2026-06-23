@@ -16,7 +16,7 @@ export function DemoPanel() {
       window.dispatchEvent(
         new CustomEvent("demo:autofill", {
           detail: { scenario },
-        })
+        }),
       );
     }, 200);
   };
@@ -28,7 +28,7 @@ export function DemoPanel() {
           title: "Chief Nelson (Nyando)",
           body: "EMERGENCY: River Nyando water levels have breached the danger mark. Evacuation to Ahero Center is active. Evacuate immediately.",
         },
-      })
+      }),
     );
   };
 
@@ -39,7 +39,7 @@ export function DemoPanel() {
           amount: 2500,
           account: "NYANDO-RELIEF",
         },
-      })
+      }),
     );
   };
 
@@ -126,7 +126,8 @@ export function DemoPanel() {
             <div className="rounded-xl bg-neutral-950 p-3 border border-neutral-800 flex gap-2">
               <ShieldAlert className="size-4 text-neutral-400 shrink-0 mt-0.5" />
               <p className="text-[10px] text-neutral-400 leading-normal">
-                Click autofill to redirect to the report page, populate coordinates, type the description, and click send. SMS simulator alerts show instant responses!
+                Click autofill to redirect to the report page, populate coordinates, type the
+                description, and click send. SMS simulator alerts show instant responses!
               </p>
             </div>
           </div>

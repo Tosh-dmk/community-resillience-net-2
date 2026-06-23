@@ -163,7 +163,9 @@ Rules:
           contents: [
             {
               role: "user",
-              parts: [{ text: `My situation: ${data.situation}\n\nAvailable programs:\n${catalog}` }],
+              parts: [
+                { text: `My situation: ${data.situation}\n\nAvailable programs:\n${catalog}` },
+              ],
             },
           ],
           systemInstruction: {
@@ -175,11 +177,16 @@ Rules:
         }),
       });
 
-      if (attemptRes.ok || attemptRes.status === 402 || attemptRes.status === 403 || attemptRes.status === 400) {
+      if (
+        attemptRes.ok ||
+        attemptRes.status === 402 ||
+        attemptRes.status === 403 ||
+        attemptRes.status === 400
+      ) {
         res = attemptRes;
         break;
       }
-      
+
       fallbackErrorText = await attemptRes.text();
     }
 
@@ -194,7 +201,7 @@ Rules:
       throw new Error("AI usage limit reached. Please add credits to keep using the assistant.");
     if (res.status === 403) {
       throw new Error(
-        "Your GEMINI_API_KEY has been disabled/blocked by Google as leaked. Please generate a new key at Google AI Studio and update the GEMINI_API_KEY in your local .env file."
+        "Your GEMINI_API_KEY has been disabled/blocked by Google as leaked. Please generate a new key at Google AI Studio and update the GEMINI_API_KEY in your local .env file.",
       );
     }
     if (!res.ok) {

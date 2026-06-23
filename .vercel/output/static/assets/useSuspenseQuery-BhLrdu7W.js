@@ -1,1 +1,5 @@
-import{L as e,N as t,P as n}from"./index-B9tAZozu.js";function r(r,i){return t({...r,enabled:!0,suspense:!0,throwOnError:n,placeholderData:void 0},e,i)}export{r as t};
+import { L as e, N as t, P as n } from "./index-B9tAZozu.js";
+function r(r, i) {
+  return t({ ...r, enabled: !0, suspense: !0, throwOnError: n, placeholderData: void 0 }, e, i);
+}
+export { r as t };

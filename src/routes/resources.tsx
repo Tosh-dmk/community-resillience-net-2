@@ -1,14 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import {
-  BookOpen,
-  FileCheck,
-  Home,
-  ShieldAlert,
-  HeartPulse,
-  Banknote,
-  Bell,
-} from "lucide-react";
+import { BookOpen, FileCheck, Home, ShieldAlert, HeartPulse, Banknote, Bell } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { RouteError, RouteNotFound } from "@/components/route-boundaries";
 import { reliefUpdatesQuery } from "@/lib/data";
@@ -91,8 +83,8 @@ function Resources() {
             Recovery resource hub
           </h1>
           <p className="mt-3 text-muted-foreground">
-            Practical, plain-language guides for every stage of recovery — plus live updates
-            on the programs available to you.
+            Practical, plain-language guides for every stage of recovery — plus live updates on the
+            programs available to you.
           </p>
         </header>
 
@@ -132,10 +124,7 @@ function Resources() {
             </h2>
             <div className="space-y-4">
               {updates.map((u) => (
-                <article
-                  key={u.id}
-                  className="rounded-2xl border border-border bg-card p-5"
-                >
+                <article key={u.id} className="rounded-2xl border border-border bg-card p-5">
                   <div className="flex items-center justify-between gap-2">
                     <span
                       className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
@@ -146,9 +135,7 @@ function Resources() {
                     </span>
                     <span className="text-xs text-muted-foreground">{u.region}</span>
                   </div>
-                  <h3 className="mt-3 font-semibold leading-snug text-foreground">
-                    {u.title}
-                  </h3>
+                  <h3 className="mt-3 font-semibold leading-snug text-foreground">{u.title}</h3>
                   <p className="mt-1.5 text-sm text-muted-foreground">{u.body}</p>
                 </article>
               ))}
