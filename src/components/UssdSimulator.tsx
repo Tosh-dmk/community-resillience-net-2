@@ -44,7 +44,6 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
     "2. Request Supplies",
     "3. Climate Grants",
     "4. Nearest Shelter",
-    "5. Talk to Chief",
   ];
 
   const clearDemoTimers = () => {
@@ -96,23 +95,6 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
       } else if (opt === "4") {
         setScreen("shelter");
         setTextLog(["Enter County Name:", "(e.g. Kisumu, Nairobi, Garissa)"]);
-      } else if (opt === "5") {
-        setScreen("helpline");
-        setTextLog([
-          "Connecting to Local Chief...",
-          "Nelson (Nyando): +254 722 000 000",
-          "Press 0 to go back",
-        ]);
-        setTimeout(() => {
-          window.dispatchEvent(
-            new CustomEvent("demo:sms", {
-              detail: {
-                title: "Chief Nelson (Nyando)",
-                body: "Habari. I am coordinating the emergency response. If you have an emergency, report via USSD Option 1 or evacuate to Ahero Base.",
-              },
-            }),
-          );
-        }, 800);
       } else {
         setTextLog(["Invalid option!", ...MAIN_MENU]);
       }
@@ -172,6 +154,18 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
             "Verification: 5-7 days",
             "SMS confirmation sent.",
           ]);
+
+          window.dispatchEvent(
+            new CustomEvent("demo:new-report", {
+              detail: {
+                name: "Offline Applicant (USSD)",
+                county: countyName,
+                disasterType: selectedGrant?.name.includes("Seed") ? "drought" : "other",
+                needs: [selectedGrant?.name || "M-Pesa cash assistance"],
+                severity: 4,
+              },
+            }),
+          );
 
           window.dispatchEvent(
             new CustomEvent("demo:sms", {
@@ -265,6 +259,18 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
           ]);
 
           window.dispatchEvent(
+            new CustomEvent("demo:new-report", {
+              detail: {
+                name: "Offline Request (USSD)",
+                county: "Garissa",
+                disasterType: "other",
+                needs: [supplyType],
+                severity: 3,
+              },
+            }),
+          );
+
+          window.dispatchEvent(
             new CustomEvent("demo:sms", {
               detail: {
                 title: "HopeBridge Logistics",
@@ -321,7 +327,7 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
     }
   };
 
-  const runAutomatedDemo = (option: "1" | "2" | "3" | "4" | "5") => {
+  const runAutomatedDemo = (option: "1" | "2" | "3" | "4") => {
     clearDemoTimers();
     setIsDemoRunning(true);
     setActiveOption(option);
@@ -410,6 +416,19 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
                   ]);
                   setIsDemoRunning(false);
                   setActiveOption(null);
+
+                  window.dispatchEvent(
+                    new CustomEvent("demo:new-report", {
+                      detail: {
+                        name: "Wanjiku Mwangi (USSD)",
+                        county: "Garissa",
+                        disasterType: "other",
+                        needs: ["Relief Food"],
+                        severity: 3,
+                      },
+                    }),
+                  );
+
                   window.dispatchEvent(
                     new CustomEvent("demo:sms", {
                       detail: {
@@ -497,6 +516,19 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
                             ]);
                             setIsDemoRunning(false);
                             setActiveOption(null);
+
+                            window.dispatchEvent(
+                              new CustomEvent("demo:new-report", {
+                                detail: {
+                                  name: "Kiprono Yego (USSD)",
+                                  county: "Turkana",
+                                  disasterType: "drought",
+                                  needs: ["M-Pesa cash assistance"],
+                                  severity: 5,
+                                },
+                              }),
+                            );
+
                             window.dispatchEvent(
                               new CustomEvent("demo:sms", {
                                 detail: {
@@ -559,29 +591,6 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
                 }, 1200);
               }, 750);
             }, 1200);
-          } else if (option === "5") {
-            setScreen("helpline");
-            setTextLog([
-              "Connecting to Local Chief...",
-              "Nelson (Nyando): +254 722 000 000",
-              "Press 0 to go back",
-            ]);
-
-            addTimer(() => {
-              window.dispatchEvent(
-                new CustomEvent("demo:sms", {
-                  detail: {
-                    title: "Chief Nelson (Nyando)",
-                    body: "Habari. I am coordinating the emergency response. If you have an emergency, report via USSD Option 1 or evacuate to Ahero Base.",
-                  },
-                }),
-              );
-              addTimer(() => {
-                setScreen("dial");
-                setIsDemoRunning(false);
-                setActiveOption(null);
-              }, 3000);
-            }, 800);
           }
         }, 1200);
       }, 1500);
@@ -611,7 +620,6 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
     { key: "2" as const, label: "2. Get Supplies" },
     { key: "3" as const, label: "3. Climate Grants ✓" },
     { key: "4" as const, label: "4. Find Shelter" },
-    { key: "5" as const, label: "5. Talk to Chief" },
   ];
 
   return (

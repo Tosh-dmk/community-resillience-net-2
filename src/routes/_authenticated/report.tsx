@@ -1,4 +1,4 @@
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, useEffect, useRef, type FormEvent } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2, ShieldCheck } from "lucide-react";
@@ -106,59 +106,79 @@ function ReportPage() {
   const [severity, setSeverity] = useState([3]);
   const [needs, setNeeds] = useState<string[]>([]);
 
+  const typingIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const runAutofill = (scenario: "nyando" | "turkana") => {
+    if (typingIntervalRef.current) {
+      clearInterval(typingIntervalRef.current);
+      typingIntervalRef.current = null;
+    }
+
+    if (scenario === "nyando") {
+      setDisasterType("flood");
+      setCounty("Kisumu");
+      setSpecificLocation("Nyando Basin");
+      setSeverity([4]);
+      setNeeds(["Temporary housing", "Food & clean water", "Medical aid"]);
+
+      const descText =
+        "Heavy seasonal rains have caused the Nyando River to burst its banks. Over 200 homesteads are completely submerged, crops destroyed, and families have evacuated to Ahero Multipurpose Center. We need immediate tents, blankets, water treatment kits, and hot meals.";
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index <= descText.length) {
+          setDescription(descText.substring(0, index));
+          index += 2;
+        } else {
+          setDescription(descText);
+          clearInterval(interval);
+        }
+      }, 15);
+      typingIntervalRef.current = interval;
+    } else if (scenario === "turkana") {
+      setDisasterType("drought");
+      setCounty("Turkana");
+      setSpecificLocation("Lodwar Outskirts");
+      setSeverity([5]);
+      setNeeds(["M-Pesa cash assistance", "Food & clean water", "Counseling & mental health"]);
+
+      const descText =
+        "Severe water scarcity and dry spells have completely depleted animal pastures. Over 80% of our cattle have died. Families are struggling to survive on one meal per day. We require immediate food supplies, water trucking, and direct M-Pesa cash grants.";
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index <= descText.length) {
+          setDescription(descText.substring(0, index));
+          index += 2;
+        } else {
+          setDescription(descText);
+          clearInterval(interval);
+        }
+      }, 15);
+      typingIntervalRef.current = interval;
+    }
+  };
+
   useEffect(() => {
+    const pending = sessionStorage.getItem("demo:autofill");
+    if (pending === "nyando" || pending === "turkana") {
+      sessionStorage.removeItem("demo:autofill");
+      runAutofill(pending);
+    }
+
     const handleDemoAutofill = (e: Event) => {
       const customEvent = e as CustomEvent;
       const scenario = customEvent.detail.scenario;
-      if (scenario === "nyando") {
-        setDisasterType("flood");
-        setCounty("Kisumu");
-        setSpecificLocation("Nyando Basin");
-        setSeverity([4]);
-        setNeeds(["Temporary housing", "Food & clean water", "Medical aid"]);
-
-        // Typing effect for description
-        const descText =
-          "Heavy seasonal rains have caused the Nyando River to burst its banks. Over 200 homesteads are completely submerged, crops destroyed, and families have evacuated to Ahero Multipurpose Center. We need immediate tents, blankets, water treatment kits, and hot meals.";
-        let currentText = "";
-        let index = 0;
-        const interval = setInterval(() => {
-          if (index < descText.length) {
-            currentText += descText.substring(0, index + 2);
-            setDescription(currentText);
-            index += 2;
-          } else {
-            setDescription(descText);
-            clearInterval(interval);
-          }
-        }, 10);
-      } else if (scenario === "turkana") {
-        setDisasterType("drought");
-        setCounty("Turkana");
-        setSpecificLocation("Lodwar Outskirts");
-        setSeverity([5]);
-        setNeeds(["M-Pesa cash assistance", "Food & clean water", "Counseling & mental health"]);
-
-        // Typing effect
-        const descText =
-          "Severe water scarcity and dry spells have completely depleted animal pastures. Over 80% of our cattle have died. Families are struggling to survive on one meal per day. We require immediate food supplies, water trucking, and direct M-Pesa cash grants.";
-        let currentText = "";
-        let index = 0;
-        const interval = setInterval(() => {
-          if (index < descText.length) {
-            currentText += descText.substring(0, index + 2);
-            setDescription(currentText);
-            index += 2;
-          } else {
-            setDescription(descText);
-            clearInterval(interval);
-          }
-        }, 10);
+      if (scenario === "nyando" || scenario === "turkana") {
+        runAutofill(scenario);
       }
     };
 
     window.addEventListener("demo:autofill", handleDemoAutofill);
-    return () => window.removeEventListener("demo:autofill", handleDemoAutofill);
+    return () => {
+      window.removeEventListener("demo:autofill", handleDemoAutofill);
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+      }
+    };
   }, []);
 
   const mutation = useMutation({

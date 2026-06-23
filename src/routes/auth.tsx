@@ -37,7 +37,12 @@ function AuthPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      navigate({ to: "/dashboard" });
+      const autofill = sessionStorage.getItem("demo:autofill");
+      if (autofill) {
+        navigate({ to: "/report" });
+      } else {
+        navigate({ to: "/dashboard" });
+      }
     }
   }, [user, loading, navigate]);
 
@@ -61,7 +66,12 @@ function AuthPage() {
         if (error) throw error;
         toast.success("Welcome back.");
       }
-      navigate({ to: "/dashboard" });
+      const autofill = sessionStorage.getItem("demo:autofill");
+      if (autofill) {
+        navigate({ to: "/report" });
+      } else {
+        navigate({ to: "/dashboard" });
+      }
     } catch (err) {
       toast.error((err as Error).message);
     } finally {

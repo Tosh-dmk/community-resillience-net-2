@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { Sparkles, Play, ShieldAlert, PhoneIncoming, Smartphone, X, Coins, Send } from "lucide-react";
+import { Sparkles, Play, ShieldAlert, Smartphone, X, Coins, Send } from "lucide-react";
 import { Button } from "./ui/button";
 
 export function DemoPanel() {
@@ -8,10 +8,11 @@ export function DemoPanel() {
   const navigate = useNavigate();
 
   const handleAutofill = (scenario: "nyando" | "turkana") => {
+    sessionStorage.setItem("demo:autofill", scenario);
     // Navigate to report page first
     navigate({ to: "/report" });
 
-    // Wait for route render to hook up listeners
+    // Wait for route render to hook up listeners (fallback if already there)
     setTimeout(() => {
       window.dispatchEvent(
         new CustomEvent("demo:autofill", {
@@ -19,17 +20,6 @@ export function DemoPanel() {
         }),
       );
     }, 200);
-  };
-
-  const triggerChiefSms = () => {
-    window.dispatchEvent(
-      new CustomEvent("demo:sms", {
-        detail: {
-          title: "Chief Nelson (Nyando)",
-          body: "EMERGENCY: River Nyando water levels have breached the danger mark. Evacuation to Ahero Center is active. Evacuate immediately.",
-        },
-      }),
-    );
   };
 
   const triggerMpesaStk = () => {
@@ -124,14 +114,6 @@ export function DemoPanel() {
                 >
                   <Smartphone className="size-3.5 mr-2 text-amber-400 shrink-0" />
                   Launch USSD Simulator
-                </Button>
-                <Button
-                  size="sm"
-                  className="w-full justify-start bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700/50 text-xs font-medium cursor-pointer"
-                  onClick={triggerChiefSms}
-                >
-                  <PhoneIncoming className="size-3.5 mr-2 text-blue-400 shrink-0" />
-                  Simulate Chief's Alert SMS
                 </Button>
                 <Button
                   size="sm"
