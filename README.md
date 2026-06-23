@@ -8,31 +8,7 @@ The platform is designed around a core thesis: **Climate disasters happen. Recov
 
 To showcase how critical aid reaches offline and disconnected rural communities, HopeBridge includes a fully interactive **USSD Mobile phone simulator** alongside the core web portal.
 
----
 
-## Live Hackathon & Demo Sandbox (Zero-Setup Required)
-
-**Hosted Demo:** You can access the live application at [hope-bridge-ten.vercel.app](https://hope-bridge-ten.vercel.app/).
-
-The application features a built-in global **Demo Panel** (floating trigger at the bottom-right of the viewport) designed to showcase complex disaster and funding flows instantly without requiring third-party API keys, SMS gateway configurations, or live database setups:
-
-- **USSD Feature Phone Simulator**:
-  - Simulates a feature phone dialer interface running standard network codes (dial `*483*111#`).
-  - **Auto-Play Script Demos**: Contains 5 one-click simulated flows:
-    1.  _1. Report Damage_: Dials ➔ selects damage report ➔ submits ➔ dispatches automated **USSD Alert Gateway** SMS.
-    2.  _2. Get Supplies_: Requests clean water/food ➔ submits ➔ dispatches **HopeBridge Logistics** confirmation ticket SMS.
-    3.  _3. Climate Grants_ (New): Opens the climate grants flow ➔ selects grant ➔ verifies county ➔ submits ➔ dispatches a grant reference SMS.
-    4.  _4. Find Shelter_: Searches shelters in `Kisumu` key-by-key ➔ returns capacity/calls ➔ dispatches shelter directory SMS.
-    5.  _5. Talk to Chief_: Connects helpline ➔ dispatches Chief Nelson's advice SMS.
-  - **Backdrop Dismissal & Navigation**: Clicking outside the simulator blurs the screen and returns to the app. A red **`← Back to App`** button is also available inside the dialer.
-- **Animated Autofill Scenarios**:
-  - **Nyando Flood** / **Turkana Drought**: Automatically redirects to the report page and triggers a typewriter-like animation that fills in coordinates, descriptions, and categories, then submits it.
-- **SMS Toast Notification Engine**:
-  - Displays floating simulated mobile push alerts (e.g., warnings from local chiefs, logistics updates, grant application confirmations, and M-Pesa STK success alerts) with high z-index stacking to overlay the screen.
-- **M-Pesa STK Push Payment**:
-  - When donating to relief campaigns or simulating beneficiary disbursements, typing PIN `1234` triggers a processing animation, registers success, and displays an inline confirmation box.
-
----
 
 ## Key Features
 
@@ -114,7 +90,7 @@ Start the development server:
 `bash
     npm run dev
     `
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Build & Production
 
