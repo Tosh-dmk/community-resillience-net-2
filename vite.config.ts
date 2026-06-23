@@ -18,7 +18,7 @@ export default defineConfig({
     nitro({
       preset: "vercel",
       rollupConfig: {
-        external: (id) => {
+        external: (id: string) => {
           if (id === "tslib") return false;
         },
       },

@@ -44,7 +44,7 @@ export function NotificationToast() {
 
   const handlePinSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (pin.length < 4) return;
+    if (!stk || pin.length < 4) return;
     setIsProcessing(true);
 
     setTimeout(() => {

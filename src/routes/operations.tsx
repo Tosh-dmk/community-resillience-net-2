@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Building2,
@@ -246,6 +246,26 @@ function OperationsPage() {
   const [beneficiaries, setBeneficiaries] = useState(MOCK_BENEFICIARIES);
   const [disbursing, setDisbursing] = useState<string | null>(null);
   const [verifying, setVerifying] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleNewReport = (e: CustomEvent) => {
+      const newBen = {
+        id: `b${Date.now()}`,
+        name: e.detail.name || "John Kamau",
+        county: e.detail.county || "Turkana",
+        disasterType: e.detail.disasterType || "drought",
+        needs: e.detail.needs || ["M-Pesa cash assistance", "Water supply"],
+        status: "submitted" as const,
+        severity: e.detail.severity || 5,
+        submitted: "Just now via USSD",
+        phone: "0799 xxx xxx",
+      };
+      setBeneficiaries((prev) => [newBen, ...prev]);
+      toast.info(`New incoming USSD report from ${newBen.name} (${newBen.county} County)`);
+    };
+    window.addEventListener("demo:new-report" as any, handleNewReport);
+    return () => window.removeEventListener("demo:new-report" as any, handleNewReport);
+  }, []);
 
   const handleVerify = (id: string) => {
     setVerifying(id);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { Sparkles, Play, ShieldAlert, PhoneIncoming, Smartphone, X } from "lucide-react";
+import { Sparkles, Play, ShieldAlert, PhoneIncoming, Smartphone, X, Coins, Send } from "lucide-react";
 import { Button } from "./ui/button";
 
 export function DemoPanel() {
@@ -38,6 +38,20 @@ export function DemoPanel() {
         detail: {
           amount: 2500,
           account: "NYANDO-RELIEF",
+        },
+      }),
+    );
+  };
+
+  const triggerIncomingUssdReport = () => {
+    window.dispatchEvent(
+      new CustomEvent("demo:new-report", {
+        detail: {
+          name: "John Kamau (USSD Simulator)",
+          county: "Turkana",
+          disasterType: "drought",
+          needs: ["M-Pesa cash assistance", "Water supply"],
+          severity: 5,
         },
       }),
     );
@@ -119,6 +133,22 @@ export function DemoPanel() {
                   <PhoneIncoming className="size-3.5 mr-2 text-blue-400 shrink-0" />
                   Simulate Chief's Alert SMS
                 </Button>
+                <Button
+                  size="sm"
+                  className="w-full justify-start bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700/50 text-xs font-medium cursor-pointer"
+                  onClick={triggerMpesaStk}
+                >
+                  <Coins className="size-3.5 mr-2 text-emerald-400 shrink-0" />
+                  Simulate M-Pesa STK Donation
+                </Button>
+                <Button
+                  size="sm"
+                  className="w-full justify-start bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700/50 text-xs font-medium cursor-pointer"
+                  onClick={triggerIncomingUssdReport}
+                >
+                  <Send className="size-3.5 mr-2 text-purple-400 shrink-0" />
+                  Simulate Incoming USSD Report
+                </Button>
               </div>
             </div>
 
@@ -126,8 +156,7 @@ export function DemoPanel() {
             <div className="rounded-xl bg-neutral-950 p-3 border border-neutral-800 flex gap-2">
               <ShieldAlert className="size-4 text-neutral-400 shrink-0 mt-0.5" />
               <p className="text-[10px] text-neutral-400 leading-normal">
-                Click autofill to redirect to the report page, populate coordinates, type the
-                description, and click send. SMS simulator alerts show instant responses!
+                Autofill works on the report page. Launch USSD simulator to dial offline codes. STK & Incoming USSD simulation can be triggered globally!
               </p>
             </div>
           </div>

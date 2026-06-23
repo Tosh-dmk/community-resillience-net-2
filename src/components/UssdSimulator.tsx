@@ -195,13 +195,38 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
         setTextLog(["Submitting Report via USSD..."]);
 
         let hazardType = "Hazard";
-        if (opt === "1") hazardType = "Flood";
-        if (opt === "2") hazardType = "Landslide";
-        if (opt === "3") hazardType = "Drought";
+        let countyName = "Kisumu";
+        let needs = ["Temporary housing", "Clean water"];
+
+        if (opt === "1") {
+          hazardType = "Flood";
+          countyName = "Kisumu";
+          needs = ["Temporary housing", "Clean water"];
+        } else if (opt === "2") {
+          hazardType = "Landslide";
+          countyName = "West Pokot";
+          needs = ["Medical aid", "Temporary housing"];
+        } else if (opt === "3") {
+          hazardType = "Drought";
+          countyName = "Turkana";
+          needs = ["M-Pesa cash assistance", "Food Relief"];
+        }
 
         setTimeout(() => {
           setScreen("done");
           setTextLog(["Report Submitted!", "Local rescue team notified.", "Thank you."]);
+
+          window.dispatchEvent(
+            new CustomEvent("demo:new-report", {
+              detail: {
+                name: "Offline Citizen (USSD)",
+                county: countyName,
+                disasterType: hazardType.toLowerCase(),
+                needs: needs,
+                severity: 4,
+              },
+            }),
+          );
 
           window.dispatchEvent(
             new CustomEvent("demo:sms", {
@@ -337,6 +362,19 @@ export function UssdSimulator({ onClose }: UssdSimulatorProps) {
                   setTextLog(["Report Submitted!", "Local rescue team notified.", "Thank you."]);
                   setIsDemoRunning(false);
                   setActiveOption(null);
+
+                  window.dispatchEvent(
+                    new CustomEvent("demo:new-report", {
+                      detail: {
+                        name: "Anyango Ochieng (USSD)",
+                        county: "Kisumu",
+                        disasterType: "flood",
+                        needs: ["Temporary housing", "Clean water"],
+                        severity: 5,
+                      },
+                    }),
+                  );
+
                   window.dispatchEvent(
                     new CustomEvent("demo:sms", {
                       detail: {
